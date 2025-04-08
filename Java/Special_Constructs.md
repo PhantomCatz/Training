@@ -225,5 +225,5 @@ Turning the previous code into a switch looks like this:
 
 The argument of the switch is what is compared to all the other values. The
 cases are the possible options for the value to be. Due to the way the switch is
-implemented, the cases can only have constant expressions.
-This means that they cannot depend on ther variables
+implemented, the cases can only have constant expressions. This means that they
+cannot depend on ther variables
