@@ -1,3 +1,5 @@
 *.html
 
 Signs/*
+
+.DS_Store
