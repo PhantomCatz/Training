@@ -209,16 +209,20 @@ Git
    - Log
    - Amend
    - Reset
- * Branching
-   * Stashing
+ - Branching
+   - Stashing
  * Undoing
    * Abort
      * Commit
      * Merge
    * Reset
+   * Checkout
    * Reflog
+   * Rebase
+     * Only local
  * Fetching
  * Merging
- * Diff/merge conflicts
+   * Diff/merge conflicts
  * Pushing
+   * Making a PR
  * Conventions/standards

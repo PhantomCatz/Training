@@ -1,9 +1,3 @@
-<style>
-body {
-    max-width: 100% !important;
-}
-</style>
-
 2: Special Constructs
 =====================
 

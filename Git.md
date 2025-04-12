@@ -1,9 +1,3 @@
-<style>
-body {
-    max-width: 100% !important;
-}
-</style>
-
 Git Usage
 =========
 
@@ -339,13 +333,13 @@ Now that you know how to stage files, you can start committing. At this point,
 your status should be like this:
 
 > ```
-> Untracked
+> Untracked (1)
 > ? c/
 >
-> Unstaged
+> Unstaged (1)
 > M a
 >
-> Staged
+> Staged (1)
 > A a
 > ```
 
@@ -422,7 +416,7 @@ You have two options:
 ### Logging
 
 Run the command `git commit -m 'Made a'`. You should now have one commit in your
-history. You cann check this by running `git log`. Each commit message will look
+history. You can check this by running `git log`. Each commit message will look
 different, but it should follow this format:
 
 1. `commit`, followed by a long hash
@@ -477,40 +471,19 @@ Then, you can run `git reset a`, which would make it become
 > M a
 > ```
 
-This command is very useful, as you can select exactly what you want to commit
+This command is useful, as you can select exactly what you want to commit
 at one time, and you can modify what has been staged before you commit. Note
 that you can write multiple file names after the command and reset as many files
-as you want. For example, `git reset a b c/d` will reset files `a`, `b`, and
-`c/d`, as the path from your working directory.
-
-
-## Branching
-
-As stated before, you can make branches in Git. You can do this with the `git
-branch NAME` command, to create a branch with the name `NAME`. Note that adding
-a name is necessary.
-
-This command creates a branch based off of your current commit. As you have
-read, this means that it has all of the commits up to and including your latest
-commit. However, it will not be changed when another branch makes additional
-changes.
-
-Run `git branch branch2`. This will make a new branch called `branch2` off of
-your last commit. If it ran successfully, then there should be no output.
-
-Get your status. Note that, although you have created the branch, you are still
-on the `main` branch. You have to switch to the branch first.
-
-You can do so by using `git checkout branch2`. The command `checkout` changes
-the files in your workspace to match that of the branch you are switching to.
+as you want. For example, `git reset a b c/d` will remove files `a`, `b`, and
+`c/d` from the stage
 
 
 ## Cloning
 
-You know how to make your own repository, but what if you want to use the
-team's? You can do so by *cloning* it. Git by itself cannot share files, but by
-using a host site like GitHub, we can share a single repository across the whole
-team.
+You know how to make your own repository, but what if you want to use one that
+already exists? You can do so by *cloning* it. Git by itself cannot share files,
+but by using a host site like GitHub, we can share a single repository across
+the whole team.
 
 To clone a Git repository from GitHub:
 
@@ -576,29 +549,166 @@ machine. Note that this is just a copy. If you want to have your changes on
 GitHub, you have to update it manually. We will talk more about updating later.
 
 
-## Git Conventions and Standards
+## Branching
 
-### Commits
+As stated before, you can make branches in Git. You can do this with the `git
+branch NAME` command, to create a branch with the name `NAME`. Note that adding
+a name is necessary.
 
-1. Name your commits by this standard:
-   1. New features should start with `feat:`
-      * New features are things that are wholly new or add new functionality to
-        something old
-   1. Bug fixes should start with `fix:`
-      * Fixes should not add new functionality
-   1. Refactoring should start with `refactor:`
-      * Refactoring should not fix bugs or add new features, but make an
-        existing part more extensible
-   1. Documentation should start with `docs:`
-      * This is for when you add documentation to anything
+This command creates a branch based off of your current commit. As you have
+read, this means that it has all of the commits up to and including your latest
+commit. However, it will not be changed when another branch makes additional
+changes.
 
-   You can have multiple of the above in a single commit, but you must list all
-   of the ones that apply. If you create a new feature and add documentation for
-   it, you should have a field for `feat` and a field for `docs`.
+Run `git branch branch2`. This will make a new branch called `branch2` off of
+your last commit. If it ran successfully, then there should be no output.
 
-1. Merges should squash the 'merge' commit into the next commit. There should be
-   a message for the merge in the next commit.
+Get your status. Note that, although you have created the branch, you are still
+on the `main` branch. You have to switch to the branch first.
 
-### Branches
+You can do so by using `git checkout branch2`. The command `checkout` changes
+the files in your workspace to match that of the branch you are switching to.
 
-1. Use your dev branch for things that are not tracked by issues.
+If you have uncommitted changes, then Git will not let you switch. This is
+because you will lose your changes when you run `checkout`. You can save your
+changes by committing, but you may not want to make a commit. If this is the
+case, then you can *stash* your changes.
+
+### Stashing your changes
+
+To stash any unsaved changes, run the command `git stash`. This command stores
+all of your changes on tracked files since your last commit on the current
+branch. Suppose your workspace looks like this:
+
+> ```
+> Untracked (1)
+> ? c/
+> 
+> Unstaged (1)
+> M a
+> ```
+
+When you run `stash`, you should get this message:
+
+> ```
+> Saved working directory and index state WIP on main: 03e7c3b Made a
+> ```
+
+The last part of this line is the commit hash and message of the latest commit.
+
+When you run `status` again, you should find that the tracked changes are no
+longer listed, but the untracked ones are still there. Git does not affect
+untracked files. The tracked changes are stored in a 'stash', which you can view
+by running `git stash list`. If you run this command, you should see that there
+is one stash in your current workspace.
+
+Now that you have stashed, you should be able to switch to another branch. If
+you run `status` again, you will find that the untracked files have not been
+modified. Again, this is because Git does not touch the untracked changes. If
+you do not want to see them in the status, you should `add` them or put them in
+the `gitignore` file.
+
+
+## Undoing Changes
+
+Sometimes, you may make a mistake and want to undo what you had done.
+
+### Aborting
+
+You can abort a commit while writing a message by providing an empty message.
+Note that when using `git commit -m`, you cannot see what changes you have made
+on the commit while writing the message. This is why is is highly recommended to
+use a real text editor to make your commits. Doing so also allows you to make
+multi-line commit messages. When you write the commit message, you should always
+make sure that you are committing exactly what you want.
+
+When you write the commit with an empty message, it should tell you that the
+commit has been aborted.
+
+If you start a merge, but you realise that you want to stop merging, you can
+abort the merging process. When you start a merge, but there is a conflict, it
+stops before making the commit. However, you can have it always pause before
+committing with the flag `--no-commit`, i.e. running `git merge --no-commit
+<args>`.
+
+When you have not finished a merge, and you want to abort it, run `git merge
+--abort`. This will roll back your changes to the commit before the merge. This
+is partly why you have to have no unsaved changes when you commit, as Git cannot
+revert to your previous workspace without fail. This command allows you to undo
+a merge while in it, so that you don't break something with a merge.
+
+### Resetting
+
+You have learned that the `reset` command can remove files from the stage.
+However, you can also roll back files to what they were in a previous commit.
+
+You can do this using the command `git checkout --`, followed by any number of
+files. This command will overwrite the contents of files in your current
+workspace, and it is irreversible. Thus, you should be very careful when using
+it. To show how this works, here is an example:
+
+Suppose your workspace is this:
+
+> ```
+> Unstaged (3)
+> M f1
+> M f2
+> M f3
+> ```
+
+After running `git checkout -- f1`, the contents of `f1` would be what they were
+on your previous commit, and your status would look like this:
+
+> ```
+> Unstaged (2)
+> M f2
+> M f3
+> ```
+
+Running `git checkout -- f2 f3` would make the contents of both `f2` and `f3` be
+what they were when you made the last commit.
+
+If you put the hash of a commit before the `--`, Git will pull the files from
+the commit you specified instead of the last one. If the file was not tracked in
+that commit, Git will give an error instead of deleting your file.
+
+When referring to a previous commit, there is a shorthand notation. `HEAD`
+refers to the latest commit, `HEAD~1` refers to the commit before that, and so
+on. Note that this will only take the commits from the current branch. You can
+find the order that commits are placed in with `git log`.
+
+You can reset your whole branch with `git reset --hard`. With this command, you
+must specify a whole commit, not an individual file. This command, unlike
+`checkout`, puts your branch at the state of the specified commit. This means
+that, when resetting to a prior commit, any later commits are not in the commit
+log. This command is **very** dangerous, as you cannot recover the overwritten
+files. Please make sure you know what you are doing when you use this command.
+
+
+# This could be implemented next year
+
+> ## Git Conventions and Standards
+> 
+> ### Commits
+> 
+> 1. Name your commits by this standard:
+>    1. New features should start with `feat:`
+>       * New features are things that are wholly new or add new functionality to
+>         something old
+>    1. Bug fixes should start with `fix:`
+>       * Fixes should not add new functionality
+>    1. Refactoring should start with `refactor:`
+>       * Refactoring should not fix bugs or add new features, but make an
+>         existing part more extensible
+>    1. Documentation should start with `docs:`
+>       * This is for when you add documentation to anything
+> 
+>    You can have multiple of the above in a single commit, but you must list all
+>    of the ones that apply. If you create a new feature and add documentation for
+>    it, you should have a field for `feat` and a field for `docs`.
+> 
+> ### Branches
+> 
+> 1. Use your dev branch for things that are not tracked by issues.
+> 1. Create a separate branch for each issue, merge it into your dev branch, and
+>    merge your dev branch into `main`

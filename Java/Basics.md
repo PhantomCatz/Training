@@ -1,12 +1,6 @@
 1: Basics
 =========
 
-<style>
-body {
-    max-width: 100% !important;
-}
-</style>
-
 > **Note:** When following this document, and others, please do not copy the
 > text from here. Type it into your editor yourself. You will not learn if you
 > just copy what is here. You will also not learn if you use AI. Instead, you
