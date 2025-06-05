@@ -83,11 +83,16 @@ JavaScript
    * Imports, exports
  * Errors, try/catch/finally
  * Async, await
- * Builtin functions
-   * alert
+ * Builtins
+   * document
+   * window
+   * console
+   * globalthis
 
 Typescript
 ==========
+
+Is this really necessary?
 
  * Types
  * Interfaces
@@ -97,6 +102,8 @@ Typescript
 
 HTML, CSS
 =========
+
+Do we need custom training for this?
  
  * Making basic web page
  * Styling
@@ -211,18 +218,19 @@ Git
    - Reset
  - Branching
    - Stashing
- * Undoing
-   * Abort
-     * Commit
-     * Merge
-   * Reset
-   * Checkout
-   * Reflog
-   * Rebase
-     * Only local
- * Fetching
+ - Fetching
  * Merging
    * Diff/merge conflicts
  * Pushing
    * Making a PR
+   * Set upstream
+ - Undoing
+   - Abort
+     - Commit
+     - Merge
+   - Reset
+   - Checkout
+   - Reflog
+   - Rebase
+     - Only local
  * Conventions/standards

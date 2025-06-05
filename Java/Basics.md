@@ -252,13 +252,17 @@ yourself. However, it may suffice to use `Math.pow`.
 
 ### Precedence and Order of Operations
 
-Operators have a certain precedence, that is, they have a certain evaulation
-order when inside an expression. Here is a list for these operators. Note that
-you do not have to memorise these, but most should be rather obvious.
+Operators have a certain precedence, that is, they have a certain evaluation
+order when inside an expression. Note that you do not have to memorise these,
+but most should be rather obvious.
 
 The different orders can be found from a quick search. Just note that most
 operations follow their normal order in math, and that a certain order can be
 forced by using parentheses.
+
+When things seem complicated or ambiguous, you should always use parentheses.
+The people who look at your code later, including yourself, will have to spend
+more mental effort in order to figure out what is occurring if you do not.
 
 ### Floating Point Numbers
 
@@ -286,7 +290,7 @@ allowed to use it. We will talk about methods alter, but for now they can be
 thought of as functions attached to objects.
 
 Suppose you have an apple in your hand. Although I have not stated exactly what
-you have in your hand, the common properties of all appkes gives you some
+you have in your hand, the common properties of all apples gives you some
 information into what you are holding. In this example, 'apple' is the type, and
 the specific one you are holding is an object of said type.
 
@@ -470,11 +474,11 @@ would write `str.charAt(0)`. To get the last character, you would write
 `str.charAt(str.length - 1)`. This might seem strange and counter-intuitive, but
 it is actually rather useful. We will see some nice use cases for this later.
 
-# TODO: Consider whether these are necessary
-
-### String Interpolation
-
-When writing strings, it may be difficult or tedious to write `"v1 = " + v1 ",
-v2= " + v2 ...` for all of your values. 
-
-### String Builder
+> # TODO: Consider whether these are necessary
+> 
+> ### String Interpolation
+> 
+> When writing strings, it may be difficult or tedious to write
+> `"v1 = " + v1 ", v2= " + v2 ...` for all of your values. 
+> 
+> ### String Builder

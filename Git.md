@@ -30,8 +30,8 @@ gives you.
 When you finish installing Homebrew, it will tell you to run some commands to
 add it to your PATH. You should do so.
 
-# Consider remaking this part
-
+> # Consider remaking this part
+> 
 > ## Creating a GitHub Account
 >
 > The team uses GitHub as its primary Git storage. Make a GitHub account by
@@ -98,8 +98,8 @@ init`. This creates a subdirectory named `.git`, which contains all of the
 information that Git uses. This directory is all Git uses to manage your files,
 so if you modify or delete this folder, Git will not work.
 
-# Change this part
-
+> # Change this part
+> 
 > Git does not store every version of your repository, as this would take too much
 > memory. Instead, it stores a list of differences, or *diffs*, between versions.
 > By adding up all of the diffs, the current file can be remade from the original
@@ -471,11 +471,11 @@ Then, you can run `git reset a`, which would make it become
 > M a
 > ```
 
-This command is useful, as you can select exactly what you want to commit
-at one time, and you can modify what has been staged before you commit. Note
-that you can write multiple file names after the command and reset as many files
-as you want. For example, `git reset a b c/d` will remove files `a`, `b`, and
-`c/d` from the stage
+This command is useful, as you can select exactly what you want to commit at one
+time, and you can modify what has been staged before you commit. Note that you
+can write multiple file names after the command and reset as many files as you
+want. For example, `git reset a b c/d` will remove files `a`, `b`, and `c/d`
+from the stage.
 
 
 ## Cloning
@@ -566,11 +566,11 @@ your last commit. If it ran successfully, then there should be no output.
 Get your status. Note that, although you have created the branch, you are still
 on the `main` branch. You have to switch to the branch first.
 
-You can do so by using `git checkout branch2`. The command `checkout` changes
+You can do so by using `git switch branch2`. The command `switch` changes
 the files in your workspace to match that of the branch you are switching to.
 
 If you have uncommitted changes, then Git will not let you switch. This is
-because you will lose your changes when you run `checkout`. You can save your
+because you will lose your changes when you run `switch`. You can save your
 changes by committing, but you may not want to make a commit. If this is the
 case, then you can *stash* your changes.
 
@@ -588,7 +588,7 @@ branch. Suppose your workspace looks like this:
 > M a
 > ```
 
-When you run `stash`, you should get this message:
+When you run `stash`, you should get this a message like this:
 
 > ```
 > Saved working directory and index state WIP on main: 03e7c3b Made a
@@ -609,11 +609,26 @@ you do not want to see them in the status, you should `add` them or put them in
 the `gitignore` file.
 
 
+## Fetching Changes from GitHub
+
+When people make new changes on GitHub, you have to download them first before
+you can use them on your own machine. This can be done with the command `git
+fetch origin`. This command adds the files in the remote repository to your
+machine, but it does not replace those in your workspace. This is because it
+stores the files in a separate area from your workspace.
+
+To update the files in your workspace, you should run the command `git merge
+origin/main`. This command attempts to merge the `main` branch from `origin`.
+The `origin` name refers to the files stored on GitHub, so merging the files
+from there would effectively cause your files to be updated.
+
+
 ## Undoing Changes
 
-Sometimes, you may make a mistake and want to undo what you had done.
+Sometimes, you may make a mistake and want to undo what you had done. There are
+a few ways to do so.
 
-### Aborting
+### Aborting Actions
 
 You can abort a commit while writing a message by providing an empty message.
 Note that when using `git commit -m`, you cannot see what changes you have made
@@ -672,11 +687,6 @@ If you put the hash of a commit before the `--`, Git will pull the files from
 the commit you specified instead of the last one. If the file was not tracked in
 that commit, Git will give an error instead of deleting your file.
 
-When referring to a previous commit, there is a shorthand notation. `HEAD`
-refers to the latest commit, `HEAD~1` refers to the commit before that, and so
-on. Note that this will only take the commits from the current branch. You can
-find the order that commits are placed in with `git log`.
-
 You can reset your whole branch with `git reset --hard`. With this command, you
 must specify a whole commit, not an individual file. This command, unlike
 `checkout`, puts your branch at the state of the specified commit. This means
@@ -684,9 +694,100 @@ that, when resetting to a prior commit, any later commits are not in the commit
 log. This command is **very** dangerous, as you cannot recover the overwritten
 files. Please make sure you know what you are doing when you use this command.
 
+Suppose your commit history looks like this, and the commit hashes are the
+letter of the commit:
 
-# This could be implemented next year
+> ```
+> A─B─C─D─E
+>         ^
+>         HEAD
+> ```
 
+Then, when you run `git reset --hard C`, your history will be
+
+
+> ```
+> A─B─C
+>     ^
+>     HEAD
+> ```
+
+This also has the exact state of the files at commit C. Your branch would not
+contain the commits D or E in its log, and you would lose any changes made after
+C.
+
+When referring to a previous commit, there is a shorthand notation. `HEAD`
+refers to the latest commit, `HEAD~1` refers to the commit before that, and so
+on. Note that this will only take the commits from the current branch. You can
+find the order that commits are placed in with `git log`. Thus, if your HEAD was
+commit E, running `git reset --hard HEAD~2` would have the same effect as the
+previous command.
+
+### Reflog
+
+Using the standard log is good for undoing a commit, but what if you wanted to
+undo a command? For this, you can use the reflog, which shows a list of commands
+made and a list of references to them. You can access this by running `git
+reflog`. This will give you a list that looks something like this:
+
+> ```
+> 625fe11 HEAD@{0}: merge branch2: Merge made by the 'ort' strategy.
+> 5b75216 HEAD@{1}: commit: Made some changes
+> 03e7c3b HEAD@{2}: reset: moving to HEAD@{1}
+> ba2afd1 HEAD@{3}: merge branch2: Fast-forward
+> 03e7c3b HEAD@{4}: checkout: moving from branch2 to main
+> ba2afd1 HEAD@{5}: reset: moving to HEAD
+> ba2afd1 HEAD@{6}: commit: Made some changes
+> 03e7c3b HEAD@{7}: reset: moving to HEAD
+> 03e7c3b HEAD@{8}: checkout: moving from main to branch2
+> 03e7c3b HEAD@{9}: reset: moving to HEAD
+> 03e7c3b HEAD@{10}: reset: moving to HEAD
+> 03e7c3b HEAD@{11}: commit (initial): Made a
+> ```
+
+This list shows two columns on the left-hand side. The leftmost one is the
+commit hash that HEAD is on after the command, i.e. your current workspace. The
+one on the right is the name of that reference.
+
+Running the command `git reset --hard HEAD@{1}` will roll back the changes to
+the state right after that commit was made. This command allows you to undo a
+reset or most other commands. The commands that you cannot undo are small
+changes, such as amends, cancelled (aborted) commands, or commands that
+overwrite what is in your workspace. Even if you can use this command, you
+should be careful not to lose your progress.
+
+### Rebase
+
+You can modify your commit history with `git rebase`. You should typically not
+need this command, and **it should not be used for commits already pushed to
+GitHub**. This command makes everybody have to redownload the changes from
+GitHub, you should **only** use it for local changes.
+
+
+## Pushing Changes
+
+If you were working completely alone, only on your machine, then just using Git
+would be enough to manage your files. Unfortunately, the team has multiple
+people on it, and thus you have to share your work with others. When you finish
+your work, you want to push your changes to GitHub, allowing others to see what
+you have done.
+
+You can push your changes by running `git push`. This command will try to update
+the commits in the remote repository with the latest from your workspace.
+However, if there is a conflict, the push will fail. You can run
+`git push --force` to force GitHub to use the commits in your workspace, but
+this is rarely needed and should not be used normally. If you see an error, it
+likely means that you do not have the latest code from GitHub. Instead of
+forcing the push, try to update your local repo first, using `fetch`.
+
+### Making a PR
+
+When you use `push`, it tries to add all of the commits from your workspace into
+the remote repository
+
+
+> # This could be implemented next year
+> 
 > ## Git Conventions and Standards
 > 
 > ### Commits
