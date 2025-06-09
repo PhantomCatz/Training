@@ -1,0 +1,19 @@
+/* Guys I know that this wont work on GitHub :( */
+body {
+	max-width: 100%;
+}
+
+.command {
+	display: block;
+	font-size: 120%;
+	font-weight: bold;
+	background-color: aliceblue;
+	border: 1px solid #4d4d4d;
+	text-align: center;
+	font-family: monospace;
+	hyphens: manual;
+	min-width: max(150px, 15%);
+	white-space: nowrap;
+	width: fit-content;
+	padding: 0px 20px;
+}

@@ -16,72 +16,10 @@ Git Usage
 > to research fixes or workarounds by yourself.
 
 > **Note 3:** This is not a comprehensive guide to Git. This just covers
-> everything you need to know to use Git on our team. You can refer to this guide
-> when learning, but if you want to learn more about Git, you may read the [Pro
+> everything you need to know to use Git on our team. You will not need to know
+> anything else, but if you want to learn more about Git, you may read the [Pro
 > Git Book](https://git-scm.com/book/en/v2)
 
-To use Git, you must first install it. You can go to the [Git website](
-https://git-scm.com/downloads) to install it. Follow the instructions to install Git.
-
-For Unix, it might ask you to install Homebrew. You should do so if you don't
-already have a package manager. Click the link, and follow the instructions it
-gives you.
-
-When you finish installing Homebrew, it will tell you to run some commands to
-add it to your PATH. You should do so.
-
-> # Consider remaking this part
-> 
-> ## Creating a GitHub Account
->
-> The team uses GitHub as its primary Git storage. Make a GitHub account by
-> going to [GitHub](https://github.com/). Follow the instructions until you have
-> made an account.
->
->
->
-> Open up a Command Window with the following steps: Click on the Windows Start
-> Icon and in the search bar, start typing “Command Prompt”. The Command Prompt
-> icon will appear under “Best match”, so click it to open up a Command Prompt
-> window (or open a Terminal window on Mac).
->
-> From the Command Prompt window, enter the following:
->
-> ssh-keygen -t ed25519 -C <github email>
->
-> where <github email> is the email you used to create your GitHub account
->
-> For example:  ssh-keygen -t ed25519 john.doe@gmail.com
->
-> You’ll be prompted to enter the following:
->
-> Enter a file in which to save the key:  hit enter to accept the default saved
-> location.  Default location can be found here:
->
-> On Windows, it’ll be saved to C:\\\\Users\\\\YOU\\\\.ssh\id_ed25519
->
-> On MacOS, it’ll be saved to $HOME/.ssh/id_ed25519
->
-> Enter a passphrase (empty for no passphrase):  if you enter a passphrase,
-> you’ll need to remember and enter it each time you push up your changes. Hit
-> enter twice if you do not wish to enter a passphrase.
->
-> Your SSH key pair files are created.
->
-> Note: By default, File Explorer in Windows does not show file extensions. To
-> make the file extensions visible, select View -> Show -> File Name Extensions.
-> If the folder C:\Users\YOU\.ssh is opened in File Explorer, there will be two
-> files with the name id_ed25519, one with the extension .pub and one without
-> any extension, as shown in below:
->
-> The two files are the public and private key pair used for user
-> authentication.
->
-> The file with the .pub extension is the public key that will be used when
-> uploading files, or setting up GitHub.
->
-> The file without the .pub extension is a private key, and should NOT be shared
-> with anyone.
 
 ## Git Overview
 
@@ -93,17 +31,12 @@ these applications, but it has more features and gives you more control over
 each snapshot.
 
 Git manages directories called *repositories*. Any directory can be made into a
-Git repository. To make a directory into a repository, `cd` into it and run `git
-init`. This creates a subdirectory named `.git`, which contains all of the
-information that Git uses. This directory is all Git uses to manage your files,
-so if you modify or delete this folder, Git will not work.
-
-> # Change this part
-> 
-> Git does not store every version of your repository, as this would take too much
-> memory. Instead, it stores a list of differences, or *diffs*, between versions.
-> By adding up all of the diffs, the current file can be remade from the original
-> one.
+Git repository. For people who have used an application similar to Google Docs,
+you would know that the application saves snapshots every so often. With Git,
+these snapshots, or *commits*, are only made manually, and they only contain the
+changes that you choose. What your repository looks like at the latest point in
+time is called your *workspace*. You are able to swap your workspace for any
+commit in your history.
 
 **Refer to this image for the following explanations:**
 > ```
@@ -112,8 +45,8 @@ so if you modify or delete this folder, Git will not work.
 >      └─D┴──G─
 > ```
 
-The Git system is usually likened to a tree. Each of the nodes on the graph, the
-letters, represent a *commit*, or a snapshot of the repository. Commits are
+The Git system is usually likened to a tree. Each of the nodes on the graph (A,
+B, etc.), represent a *commit*, or a snapshot of the repository. Commits are
 meant to be static, not changing and not dependent on future commits.
 
 The paths on the graph should be read from left to right, starting from node A.
@@ -128,22 +61,175 @@ E are made, the only changes in the top branch are those made by C and E. In the
 bottom branch, only the changes from D are present. This allows multiple people
 to work on the same project without interfering with each other.
 
-Although branches are convenient, they are not useful unless you can somehow
-recombine the changes made. As it turns out, you can do so with a process called
-*merging*. You can merge the changes of one branch into another branch, which
-will add the changes from both branches together. This lets you split work into
-multiple groups, then merge the changes together once everything is finished.
-However, sometimes the changes may conflict, in which case you would have to
-resolve the merge manually, choosing what changes to make. We will talk more
-about merging later.
+Although branches are convenient, in that they allow multiple people to work on
+the same task, they are not useful unless you can somehow recombine the changes
+made. As it turns out, you can do so with a process called *merging*. You can
+merge the changes of one branch into another branch, which will add the changes
+from both branches together. This lets you split work into multiple groups, then
+merge the changes together once everything is finished. However, sometimes the
+changes may conflict, in which case you would have to resolve the merge
+manually, choosing what changes to make. We will talk more about merging later.
 
-The line after D represents merging the bottom branch into the top branch. At
-commit F, all of the changes from A-E are present. However, note that the only
-thing that happened was that the bottom branch was merged into the top branch.
-At commit G, only the changes from A, B, and D are present.
+The line directly after D that connects the two branches represents merging the
+bottom branch into the top branch. At commit F, all of the changes from A-E are
+present. However, note that the only thing that happened was that the bottom
+branch was merged into the top branch. At commit G, only the changes from A, B,
+and D are present.
+
+
+## Create a GitHub Account
+
+1. Go to [GitHub](https://github.com/)
+
+1. Click on the **Sign up** button.
+
+1. Enter your email and click **Continue**.
+
+1. Enter a password and click **Continue**.
+
+1. Enter a username and click **Continue**.
+
+1. Click on **Verify**.
+
+1. Follow the instructions on the screen to match the image direction. Click
+   **Submit** after turning the image to the correct direction.
+
+1. A verification code is sent to your email. Check your email and enter the
+   verification code on the screen.
+
+1. A login screen is displayed. Follow the prompt on the screen to login to
+   GitHub.
+
+1. Follow the prompt on the screen to enter information about yourself. Click
+   **Continue** when done.
+
+1. When asked what 2 things you want to do with GitHub, select the following:
+
+   1. Start a new project
+
+   1. Connect with other developers
+
+1. Click **Continue**.
+
+1. Select the free version by clicking on the "**Continue for free**" button.
+
+1. Once your account is created, you’ll be directed to the login screen. Login
+   to GitHub.
+
+
+## Connect with PhantomCatz
+
+1. Once your GitHub account is created, logon to your account if not already
+   done so.
+
+1. Notify the your lead to give you access to PhantomCatz’s source code.
+   You’ll need to provide your email that you used to sign up for the GitHub
+   account.
+
+1. Once the permission is granted, the **PhantomCatz** organization will show up
+   in your account’s organization list. Follow these steps to see your
+   organization list.
+
+1. From your GitHub account, click on your profile in the upper right corner,
+   and select **Your organizations**.
+
+1. Click on **PhantomCatz**.
+
+1. From there, you can navigate to the PhantomCatz’s repositories and source
+   code.
+
+## Setup GitHub SSH public key
+
+### Create SSH Key Pair
+
+1. Open the terminal/command line. For Mac, this can be done by opening the
+   search menu and typing 'Terminal'. On Windows, click the window icon and
+   search for 'Command Prompt'.
+
+1. From the terminal, enter the following:
+
+   `ssh-keygen -t ed25519 -C <github email>`
+
+   * where <github email> is the email you used to create your GitHub account
+   * For example: `ssh-keygen -t ed25519 john.doe@gmail.com`
+
+1. You’ll be prompted to enter the following:
+
+   * Enter a file in which to save the key: hit enter to accept the default
+     saved location. Default location can be found here:
+     * On MacOS, it’ll be saved to $HOME/.ssh/id_ed25519
+     * On Windows, it’ll be saved to C:\Users\YOU\.ssh\id_ed25519
+   * Enter a passphrase (empty for no passphrase): if you enter a passphrase,
+     you’ll need to remember and enter it each time you push up your changes.
+     Hit enter twice if you do not wish to enter a passphrase.
+
+1. Your SSH key pair files are created.
+   * The two files are public and private key pair used for user authentication.
+     * The file with the .pub extension is the public key that will be used when
+       uploading files, or setting up GitHub.
+     * The file without the .pub extension is a private key, and should NOT be
+       shared with anyone.
+
+### Adding Your SSH Key to ssh-agent
+
+1. Open the new `id_ed255519.pub` file in a text editor. Copy the public key
+   (all content in this file).
+   * Note: the `id_ed25519.pub` file is located in the default location
+     mentioned previously.
+
+1. From a web browser, login to GitHub.
+
+1. Click on your GitHub’s profile and select **Settings**.
+
+1. From the left panel, click on **SSH and GPG keys**.
+
+1. Click on the **New SSH key** button.
+
+1. Enter a title.
+
+1. Paste the public key that you’ve copied from step 1 to the **Key** text box.
+
+1. Click on **Add SSH key**.
+
+## Install and Configure Git on Your Computer
+
+1. Go to the [Git website]( https://git-scm.com/downloads) to install Git.
+   Follow the instructions for your corresponding OS.
+   * For Windows, when you are prompted to select line ending conversions,
+     select this option:
+
+     ![Checkout Windows style, commit Unix style line
+     endings](../Images/WindowsGitCheckoutStyleOption.png)
+
+1. In your terminal, run the following:
+   1. `cd`
+
+   1. `git config --global user.name <GitHub username>`
+      * Where `<GitHub username>` is the username you used to create your GitHub
+        account.
+      * For example: `git config --global user.name johndoe`
+
+   1. `git config --global credential.username <GitHub username>`
+      * Where `<GitHub username>` is the username you used to create your GitHub
+        account. This command is necessary if you have multiple users on the
+        computer and you need to switch accounts.
+      * For example: `git config --global credential.username johndoe`
+
+   1. `git config --global user.email <email>`
+      * where `<email>` is the email you used to create your GitHub account
+      * For example: `git config --global user.email john.doe@gmail.com`
+
+   1. `git config --list`
+      * Verify the user.name, user.email, and credential.username are set
+        correctly. If the information is incorrect, refer to the above steps to
+        make the necessary corrections.
 
 
 ## Basics
+
+<code class="command">
+git status
+</code>
 
 Running the command `git status` will give you the status of the current git
 repository. Try to run this on the command line. It should give you a message
@@ -159,21 +245,30 @@ direct child, a `.git` directory. This just means that your directory has to be
 a child of a directory containing a `.git` directory. However, you should not
 make this directory yourself.
 
-As stated before, you can make a directory a Git repository by running `git
-init`. Create a directory for this training in a good location, perhaps putting
-it in a directory for robotics. `cd` into it in the terminal, then run `git init`.
+<code class="command">
+git init
+</code>
+
+To make a directory into a repository, `cd` into it in the terminal and run `git
+init`. This creates a subdirectory named `.git`, which contains all of the
+information that Git uses. This directory is what Git uses to manage your files,
+so if this folder is modified or deleted, Git would not be able to work
+properly. Create a directory for this training in a good location, perhaps
+putting it in a directory for robotics. `cd` into it in the terminal, then run
+`git init`.
 
 Now you can run `git status` again. You should get a message like this:
 
 > ```
 > On branch main
-> Your branch is up to date with origin/main
 >
-> nothing to commit, working tree clean
+> No commits yet
+>
+> nothing to commit (create/copy files and use "git add" to track)
 > ```
 
-There is no failiure this time, so we are now in a Git repository. But what does
-each line mean?
+There is no failure this time, which means that we are now in a Git repository.
+But what does each line mean?
 
 The first line states that you are on the branch `main`. This branch is the
 initial branch made by Git, like the line containing commits A and B in the
@@ -182,7 +277,7 @@ previous example.
 Although this is the default branch, you should not work on
 this branch. On our team, the `main` branch is meant for releases, not normal
 working. To enforce this, pushing to `main` on GitHub is not allowed, and pull
-requests require a review. We will cover more about this later. 
+requests require a review. We will cover more about this later.
 
 The second line states that the current workspace has all the changes that
 `origin/main` does. `origin` can be thought of as the files on GitHub, and
@@ -200,6 +295,10 @@ that your working tree is empty. We will also cover this topic later.
 ## Committing
 
 ### How to commit
+
+<code class="command">
+git commit
+</code>
 
 As stated before, commits are snapshots of your code. To make a commit, run the
 command `git commit`. However, if you have been following this tutorial, when
@@ -236,7 +335,7 @@ explain this, we will need to understand how Git tracks files.
 ### File tracking
 
 Git remembers what files have been added to previous commits. Note that Git only
-saves **files**, not **directories**. When you change a file's location or name,
+saves *files*, not *directories*. When you change a file's location or name,
 it treats this as a special operation, rather than the creation and deletion of
 whole files. This means that you cannot add an empty directory to a Git
 repository. The directory structure in Git is only implicitly made by the files
@@ -250,11 +349,15 @@ files.
 1. Staged files are files that have been prepared for committing. We will talk
    more about staging files later.
 
-1. Unstaged files are files that have been inside a commit before, but the
+2. Unstaged files are files that have been inside a commit before, but the
    changes have not been staged.
 
-1. Untracked files are files that have never been added to a commit and are not
+3. Untracked files are files that have never been added to a commit and are not
    staged.
+
+<code class="command">
+git add
+</code>
 
 To stage a file, do `git add PATH/TO/FILE`, where the path is based on your
 current working directory. Additionally, you can to `git add PATH/TO/DIRECTORY`
@@ -311,13 +414,19 @@ There are two things of note here:
    PATH/TO/FILE` to get the state of the file at the time that you had staged
    it. However, this only works for staged files.
 
-1. You can see how the file you just added is untracked. Note that you also
+2. You can see how the file you just added is untracked. Note that you also
    created a new directory, which has never been tracked either. When you do
    this, Git does not list all of the files contained inside it, but just the
    highest level directory that hasn't been tracked yet.
 
+<code class="command">
+git add -A
+</code>
+
 A helpful command is `git add -A`, to add all of the files that are contained
 inside the repository.
+
+### gitignore file
 
 What if there are certain files that you never want to add to Git, such as
 temporary files, log files, or compiled code? To do so, you can make a special
@@ -326,6 +435,43 @@ list would be ignored in the status. This means that if a file were to be
 changed but it was listed in the gitignore, the status would not list it in the
 untracked files. However, note that if a file is already tracked, then the
 gitignore will not affect it, and it will always be listed in the status.
+
+Here is a sample `gitignore` file, reproduced below:
+
+> ```
+> .DS_Store
+> 
+> *.html
+> !Header.html
+> 
+> # Ignore build folder
+> build
+> ```
+
+1. The first item makes all files named '.DS_Store' be ignored by Git. Any file
+   name can be listed in the `gitignore`, and these names match files at any
+   level of the repository.
+
+1. The second item makes any file that ends in '.html' ignored. This item makes
+   use of Unix globbing, where the asterisk ('*') is a stand-in for any number
+   (including zero) of characters.
+
+1. The third item starts with '!', and is a negation. This rule states that any
+   file named 'Header.html' is *not* ignored, or that it *is* tracked by Git.
+   Note that any rule overrides one that is above it. In this case, it overrides
+   the '*.html' rule. However, if one were to swap the order of these two, then
+   *every* file ending with '.html' would be ignored, even if the name was
+   'Header.html'.
+
+1. The *fifth* item makes any files named 'build' ignored. I have been writing
+   file, but this was actually just for simplicity. Git will also ignore any
+   *directory* named 'build' as well. You should note, again, that these rules
+   apply to every level of the repository, not just the top level.
+
+1. Finally, any text that follows a hash ("#"), such as the fourth item, is
+   considered a comment, not as a rule (or part of one). Thus, you can write
+   lines that describe certain parts of your `gitignore`. Any blank line is also
+   not considered as a rule.
 
 ### How to commit, part 2
 
@@ -343,14 +489,19 @@ your status should be like this:
 > A a
 > ```
 
-From now on, this document will use this notation for the status. For untracked
-files, they will be prefixed with `?`. Files that are tracked and added will be
-prefixed with `A`. Files that are tracked and have been modified will be
-prefixed with `M`. This is not shown, but tracked files that have been deleted
-will be prefixed with `D`.
+From now on, this document will use this notation for the status, as the normal
+one is rather verbose. For untracked files, they will be prefixed with `?`.
+Files that are tracked and added will be prefixed with `A`. Files that are
+tracked and have been modified will be prefixed with `M`. This is not shown, but
+tracked files that have been deleted will be prefixed with `D`.
 
-You can get a display like this by running status with the `s` flag, for short,
-i.e. `git status -s`. You can search up more about short form online.
+<code class="command">
+git status -s
+</code>
+
+This text actually comes from a plugin I use, but you can see a view that shows
+something similar to this by running `git status -s`. You can find more about
+the short form online.
 
 ### Adding a Commit Message
 
@@ -381,11 +532,19 @@ an editor that looks like this:
 > ~
 > ```
 
-When you make a commit in Git, you have to add a message. If you want to learn
-how to use this editor, read the Vim training. Otherwise, read the following:
+When you make a commit in Git, you have to add a message. Learning this editor
+is totally optional, but if you want to do so, you may research more about
+*Vim*. Otherwise, read the following:
 
 To get out of the editor, type `ZZ`. Note the caps. You should remember this if
 you make a mistake in the future.
+
+<code class="command">
+git config core.editor
+</code>
+<code class="command">
+git commit -m
+</code>
 
 You have two options:
 
@@ -409,32 +568,40 @@ You have two options:
    the contents of the file. You can experiment with this yourself and search
    online on how to use your favorite editor.
 
-1. You can use the `-m` flag. Again, this method is not recommended. However,
+2. You can use the `-m` flag. Again, this method is not recommended. However,
    you can write `git commit -m 'MESSAGE'` to write the commit message as
    `MESSAGE`.
 
 ### Logging
 
-Run the command `git commit -m 'Made a'`. You should now have one commit in your
+<code class="command">
+git log
+</code>
+
+Make a commit with the message 'Made a'. You should now have one commit in your
 history. You can check this by running `git log`. Each commit message will look
 different, but it should follow this format:
 
 1. `commit`, followed by a long hash
-1. `Author`, followed by your name, followed by your email in angled brackets
-1. `Date`, followed by the time you made the commit
-1. The commit message you just wrote
+2. `Author`, followed by your name, followed by your email in angled brackets
+3. `Date`, followed by the time you made the commit
+4. The commit message you just wrote
 
 This log should give you all of the information you need to do further work
-regarding a commit. Most notably, the commit hash is typically used to refer to
-a specific commit. Git allows you to replace any usage of a hash with just a
-part of the start, as long as that can refer to a unique commit. If this is too
-difficult to use, then Git has another option: the latest commit is referred to
-as `HEAD~0`, the commit before that is `HEAD~1`, and so on.
+regarding a commit. Most notably, the commit hash can be used to refer to a
+specific commit in your history. Git allows you to replace any usage of a hash
+with just a part of the start, as long as that can refer to a unique commit. If
+this is too difficult to use, then Git has another option: the latest commit is
+referred to as `HEAD~0`, the commit before that is `HEAD~1`, and so on.
 
 With more commits, your log will grow larger, but you can still search through
 it to find what you need if the commit messages are good.
 
 ### Amending
+
+<code class="command">
+git commit --amend
+</code>
 
 If you mess up a commit, like forgetting to stage files or messing up the
 message, you can edit the commit as long as you don't push the commit. You can
@@ -452,7 +619,11 @@ add a file:
 > ```
 
 This process will add the file to the commit, making it seem as it was always
-added.
+added. At this point, it will give you a chance to rewrite the commit message.
+
+You should note that this will have issues if you try to amend a commit that has
+already been pushed to GitHub. You should only amend commits that are fully
+local.
 
 ### Resetting
 
@@ -471,6 +642,10 @@ Then, you can run `git reset a`, which would make it become
 > M a
 > ```
 
+<code class="command">
+git reset
+</code>
+
 This command is useful, as you can select exactly what you want to commit at one
 time, and you can modify what has been staged before you commit. Note that you
 can write multiple file names after the command and reset as many files as you
@@ -479,6 +654,10 @@ from the stage.
 
 
 ## Cloning
+
+<code class="command">
+git clone
+</code>
 
 You know how to make your own repository, but what if you want to use one that
 already exists? You can do so by *cloning* it. Git by itself cannot share files,
@@ -489,10 +668,10 @@ To clone a Git repository from GitHub:
 
 1. Go to the repository on GitHub
 
-1. Click the arrow on the green 'Code' button, and look under 'Local'. It should
+2. Click the arrow on the green 'Code' button, and look under 'Local'. It should
    say 'Clone' under it.
 
-1. Some options may appear:
+3. Some options may appear:
 
    1. HTTP
 
@@ -508,10 +687,10 @@ To clone a Git repository from GitHub:
 
    Click the corresponding tab and copy the link it gives you.
 
-1. Open your terminal, and `cd` to the directory into which you want to clone
+4. Open your terminal, and `cd` to the directory into which you want to clone
    the repository.
 
-1. Enter `git clone `, and then the link that you just copied. There should be a
+5. Enter `git clone `, and then the link that you just copied. There should be a
    space between `clone` and the link.
 
    If your screen freezes for a long time, then press `<C-c>`. This will stop
@@ -524,22 +703,16 @@ To clone a Git repository from GitHub:
 
    1. Retry cloning using the HTTPS link.
 
-   1. Go into the repository. You can do this from the terminal, or use the
+   2. Go into the repository. You can do this from the terminal, or use the
       native file explorer.
 
       * For Unix, do `ls -la`. This shows hidden files and displays them in a
         readable list
 
-      * For Windows, just do `dir`.
+      * For Windows, do `dir /a`.
 
-   1. Go into the `.git` directory. This directory is very important. You should
-      not try modifying anything in here without knowing what you are doing.
-
-   1. Edit the `config` file. This stores the configuration for the current
-      repository.
-
-   1. Under `[remote "origin"]`, change `url` to the SSH link. This makes the
-      access link the correct type.
+   3. Do `git config remote.origin.url <URL>`, where '`<URl>`' is the SSH link
+      to the repository, found in the same place as the previous link.
 
    Although you can clone through HTTPS, you will likely not be able to do much
    more with it, unless you are on Windows.
@@ -760,7 +933,7 @@ should be careful not to lose your progress.
 
 You can modify your commit history with `git rebase`. You should typically not
 need this command, and **it should not be used for commits already pushed to
-GitHub**. This command makes everybody have to redownload the changes from
+GitHub**. This command makes everybody have to re-download the changes from
 GitHub, you should **only** use it for local changes.
 
 
@@ -783,7 +956,62 @@ forcing the push, try to update your local repo first, using `fetch`.
 ### Making a PR
 
 When you use `push`, it tries to add all of the commits from your workspace into
-the remote repository
+the remote repository. However, you should only be working on your own branch,
+and, if the repository is set up correctly, you shouldn't be allowed to push to
+the `main` branch. Thus, when you push, the only code that should change on
+GitHub is that which is on your own branch. To add your changes to `main`, you
+have to make a pull request (PR).
+
+![Tabs when looking at a repository on GitHub](../Images/RepositoryTabs.png)
+
+Click on the 'Pull requests' tab, and choose to make a 'New pull request' (Green
+button). This will open a selection, where you should choose your branch, which
+will, in turn, bring you to a screen where you can write a pull request. Here is
+a sample picture of when I tried to make a new pull request.
+
+![New pull request screen](../Images/NewPullRequest.png)
+
+There are a few things you should fill out:
+
+1. Title: This should follow the style guide for writing PR's. Typically, you
+   would just write a few words on what the change was.
+
+2. Description: This should be used to describe any of the other changes you
+   made. You should not be describing why you made the change.
+
+3. Reviewers: Pull requests require a peer-review before they are accepted.
+   Typically, your lead should review all your code, but someone else may be
+   able to do it. You should select the person who would review your code.
+
+When you finish writing your PR, you should submit it and notify your lead and
+whoever is reviewing your code.
+
+## Merging
+
+As explained before, you can merge the main branch into your own workspace by
+doing `git merge`. This will normally succeed without conflicts, and all you
+would have to know is that it updates your workspace with the latest code from
+`main`.
+
+Restating what it does, `merge` adds all of the changes from the specified
+branch into your current workspace. Thus, if you had two local branches, you
+could rectify them into one branch by using `merge`. For example, if you had
+branches `a` and `b`, and you wanted to have the changes made in the `b` branch
+in the `a` branch, you could run `git merge b` while on the `a` branch (Recall
+that the command to switch to this branch would be `git switch a`). The effect
+of running this command would be that the commits on `b` would be able to be
+seen in `a`, and all of the changes from those would be added as well.
+
+When I say 'changes', I mean lines that differ in the code. Each branch should
+have a common ancestor (or, at least, the initial commit). Git compares each
+file in the target branch (ours) to the source branch (theirs) and applies the
+additions and deletions. You should note that Git views differences as linewise;
+if a line is different in any way from another, they are considered different.
+Thus, even minor changes, such as changing the indentation, would be viewed by
+Git as making a change.
+
+As this is the case, it would be very easy to have your changes overlap with
+those of someone else's. Git is not able to manage merging these changes 
 
 
 > # This could be implemented next year
@@ -793,9 +1021,9 @@ the remote repository
 > ### Commits
 > 
 > 1. Name your commits by this standard:
->    1. New features should start with `feat:`
->       * New features are things that are wholly new or add new functionality to
->         something old
+>    1. New features should start with `feat:`, or `feat(topic):`
+>       * New features are things that are wholly new or add new functionality
+>         to something old
 >    1. Bug fixes should start with `fix:`
 >       * Fixes should not add new functionality
 >    1. Refactoring should start with `refactor:`
@@ -804,9 +1032,10 @@ the remote repository
 >    1. Documentation should start with `docs:`
 >       * This is for when you add documentation to anything
 > 
->    You can have multiple of the above in a single commit, but you must list all
->    of the ones that apply. If you create a new feature and add documentation for
->    it, you should have a field for `feat` and a field for `docs`.
+>    You can have multiple of the above in a single commit, but you must list
+>    all of the ones that apply. If you create a new feature and add
+>    documentation for it, you should have a field for `feat` and a field for
+>    `docs`.
 > 
 > ### Branches
 > 

@@ -220,9 +220,10 @@ Git
    - Stashing
  - Fetching
  * Merging
+   * Strategies
    * Diff/merge conflicts
  * Pushing
-   * Making a PR
+   - Making a PR
    * Set upstream
  - Undoing
    - Abort
@@ -234,3 +235,9 @@ Git
    - Rebase
      - Only local
  * Conventions/standards
+
+Tools
+=====
+
+ * MySQL
+ * DigitalOcean
