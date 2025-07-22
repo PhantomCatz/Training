@@ -199,7 +199,7 @@ and D are present.
      select this option:
 
      ![Checkout Windows style, commit Unix style line
-     endings](../Images/WindowsGitCheckoutStyleOption.png)
+     endings](../Images/Git/WindowsGitCheckoutStyleOption.png)
 
 1. In your terminal, run the following:
    1. `cd`
@@ -227,9 +227,7 @@ and D are present.
 
 ## Basics
 
-<code class="command">
-git status
-</code>
+<code class="command">git status</code>
 
 Running the command `git status` will give you the status of the current git
 repository. Try to run this on the command line. It should give you a message
@@ -245,9 +243,7 @@ direct child, a `.git` directory. This just means that your directory has to be
 a child of a directory containing a `.git` directory. However, you should not
 make this directory yourself.
 
-<code class="command">
-git init
-</code>
+<code class="command">git init</code>
 
 To make a directory into a repository, `cd` into it in the terminal and run `git
 init`. This creates a subdirectory named `.git`, which contains all of the
@@ -296,9 +292,7 @@ that your working tree is empty. We will also cover this topic later.
 
 ### How to commit
 
-<code class="command">
-git commit
-</code>
+<code class="command">git commit</code>
 
 As stated before, commits are snapshots of your code. To make a commit, run the
 command `git commit`. However, if you have been following this tutorial, when
@@ -355,9 +349,7 @@ files.
 3. Untracked files are files that have never been added to a commit and are not
    staged.
 
-<code class="command">
-git add
-</code>
+<code class="command">git add</code>
 
 To stage a file, do `git add PATH/TO/FILE`, where the path is based on your
 current working directory. Additionally, you can to `git add PATH/TO/DIRECTORY`
@@ -419,9 +411,7 @@ There are two things of note here:
    this, Git does not list all of the files contained inside it, but just the
    highest level directory that hasn't been tracked yet.
 
-<code class="command">
-git add -A
-</code>
+<code class="command">git add -A</code>
 
 A helpful command is `git add -A`, to add all of the files that are contained
 inside the repository.
@@ -495,9 +485,7 @@ Files that are tracked and added will be prefixed with `A`. Files that are
 tracked and have been modified will be prefixed with `M`. This is not shown, but
 tracked files that have been deleted will be prefixed with `D`.
 
-<code class="command">
-git status -s
-</code>
+<code class="command">git status -s</code>
 
 This text actually comes from a plugin I use, but you can see a view that shows
 something similar to this by running `git status -s`. You can find more about
@@ -539,12 +527,8 @@ is totally optional, but if you want to do so, you may research more about
 To get out of the editor, type `ZZ`. Note the caps. You should remember this if
 you make a mistake in the future.
 
-<code class="command">
-git config core.editor
-</code>
-<code class="command">
-git commit -m
-</code>
+<code class="command">git config core.editor</code>
+<code class="command">git commit -m</code>
 
 You have two options:
 
@@ -574,9 +558,7 @@ You have two options:
 
 ### Logging
 
-<code class="command">
-git log
-</code>
+<code class="command">git log</code>
 
 Make a commit with the message 'Made a'. You should now have one commit in your
 history. You can check this by running `git log`. Each commit message will look
@@ -599,9 +581,7 @@ it to find what you need if the commit messages are good.
 
 ### Amending
 
-<code class="command">
-git commit --amend
-</code>
+<code class="command">git commit --amend</code>
 
 If you mess up a commit, like forgetting to stage files or messing up the
 message, you can edit the commit as long as you don't push the commit. You can
@@ -642,9 +622,7 @@ Then, you can run `git reset a`, which would make it become
 > M a
 > ```
 
-<code class="command">
-git reset
-</code>
+<code class="command">git reset</code>
 
 This command is useful, as you can select exactly what you want to commit at one
 time, and you can modify what has been staged before you commit. Note that you
@@ -655,9 +633,7 @@ from the stage.
 
 ## Cloning
 
-<code class="command">
-git clone
-</code>
+<code class="command">git clone</code>
 
 You know how to make your own repository, but what if you want to use one that
 already exists? You can do so by *cloning* it. Git by itself cannot share files,
@@ -749,6 +725,8 @@ case, then you can *stash* your changes.
 
 ### Stashing your changes
 
+<code class="command">git stash</code>
+
 To stash any unsaved changes, run the command `git stash`. This command stores
 all of your changes on tracked files since your last commit on the current
 branch. Suppose your workspace looks like this:
@@ -784,11 +762,14 @@ the `gitignore` file.
 
 ## Fetching Changes from GitHub
 
+<code class="command">git fetch</code>
+
 When people make new changes on GitHub, you have to download them first before
 you can use them on your own machine. This can be done with the command `git
-fetch origin`. This command adds the files in the remote repository to your
-machine, but it does not replace those in your workspace. This is because it
-stores the files in a separate area from your workspace.
+fetch REMOTE`. This `REMOTE` is usually `origin` as default, but it could be
+named something else.  This command adds the files in the remote repository to
+your machine, but it does not replace those in your workspace. This is because
+it stores the files in a separate area from your workspace.
 
 To update the files in your workspace, you should run the command `git merge
 origin/main`. This command attempts to merge the `main` branch from `origin`.
@@ -827,6 +808,8 @@ a merge while in it, so that you don't break something with a merge.
 
 ### Resetting
 
+<code class="command">git checkout --</code>
+
 You have learned that the `reset` command can remove files from the stage.
 However, you can also roll back files to what they were in a previous commit.
 
@@ -854,18 +837,22 @@ on your previous commit, and your status would look like this:
 > ```
 
 Running `git checkout -- f2 f3` would make the contents of both `f2` and `f3` be
-what they were when you made the last commit.
+what they were when you made the last commit. Your workspace would now look
+exactly like the latest commit you made.
 
 If you put the hash of a commit before the `--`, Git will pull the files from
-the commit you specified instead of the last one. If the file was not tracked in
+the commit you specified instead of the latest one. If the file was not tracked in
 that commit, Git will give an error instead of deleting your file.
 
-You can reset your whole branch with `git reset --hard`. With this command, you
-must specify a whole commit, not an individual file. This command, unlike
-`checkout`, puts your branch at the state of the specified commit. This means
-that, when resetting to a prior commit, any later commits are not in the commit
-log. This command is **very** dangerous, as you cannot recover the overwritten
-files. Please make sure you know what you are doing when you use this command.
+### Hard reset
+
+You can reset your whole branch with `git reset --hard <COMMIT>`. With this
+command, you must specify a whole commit, not an individual file. This command,
+unlike `checkout`, puts your branch at the state of the specified commit. This
+means that, when resetting to a prior commit, any later commits are not in the
+commit log. This command is **very** dangerous, as you cannot recover the
+overwritten files. Please make sure you know what you are doing when you use
+this command.
 
 Suppose your commit history looks like this, and the commit hashes are the
 letter of the commit:
@@ -897,6 +884,8 @@ commit E, running `git reset --hard HEAD~2` would have the same effect as the
 previous command.
 
 ### Reflog
+
+<code class="command">git reflog</code>
 
 Using the standard log is good for undoing a commit, but what if you wanted to
 undo a command? For this, you can use the reflog, which shows a list of commands
@@ -931,6 +920,8 @@ should be careful not to lose your progress.
 
 ### Rebase
 
+<code class="command">git rebase</code>
+
 You can modify your commit history with `git rebase`. You should typically not
 need this command, and **it should not be used for commits already pushed to
 GitHub**. This command makes everybody have to re-download the changes from
@@ -945,13 +936,15 @@ people on it, and thus you have to share your work with others. When you finish
 your work, you want to push your changes to GitHub, allowing others to see what
 you have done.
 
+<code class="command">git push</code>
+
 You can push your changes by running `git push`. This command will try to update
 the commits in the remote repository with the latest from your workspace.
 However, if there is a conflict, the push will fail. You can run
 `git push --force` to force GitHub to use the commits in your workspace, but
 this is rarely needed and should not be used normally. If you see an error, it
 likely means that you do not have the latest code from GitHub. Instead of
-forcing the push, try to update your local repo first, using `fetch`.
+forcing the push, try to update your local repo first, using `fetch` and `merge`.
 
 ### Making a PR
 
@@ -962,14 +955,14 @@ the `main` branch. Thus, when you push, the only code that should change on
 GitHub is that which is on your own branch. To add your changes to `main`, you
 have to make a pull request (PR).
 
-![Tabs when looking at a repository on GitHub](../Images/RepositoryTabs.png)
+![Tabs when looking at a repository on GitHub](../Images/Git/RepositoryTabs.png)
 
 Click on the 'Pull requests' tab, and choose to make a 'New pull request' (Green
 button). This will open a selection, where you should choose your branch, which
 will, in turn, bring you to a screen where you can write a pull request. Here is
 a sample picture of when I tried to make a new pull request.
 
-![New pull request screen](../Images/NewPullRequest.png)
+![New pull request screen](../Images/Git/NewPullRequest.png)
 
 There are a few things you should fill out:
 
@@ -988,6 +981,8 @@ whoever is reviewing your code.
 
 ## Merging
 
+<code class="command">git merge</code>
+
 As explained before, you can merge the main branch into your own workspace by
 doing `git merge`. This will normally succeed without conflicts, and all you
 would have to know is that it updates your workspace with the latest code from
@@ -1002,16 +997,131 @@ that the command to switch to this branch would be `git switch a`). The effect
 of running this command would be that the commits on `b` would be able to be
 seen in `a`, and all of the changes from those would be added as well.
 
-When I say 'changes', I mean lines that differ in the code. Each branch should
-have a common ancestor (or, at least, the initial commit). Git compares each
-file in the target branch (ours) to the source branch (theirs) and applies the
-additions and deletions. You should note that Git views differences as linewise;
-if a line is different in any way from another, they are considered different.
-Thus, even minor changes, such as changing the indentation, would be viewed by
-Git as making a change.
+When I say 'changes', I mean lines that differ in the source code from the
+previous commit. Each branch should have a common ancestor (or, at least, the
+initial commit). Git compares each file in the target branch (ours) to the
+source branch (theirs) and applies the additions and deletions. You should note
+that Git views differences as linewise; if a line is different in any way from
+another, they are considered different. Thus, even minor changes, such as
+changing the indentation, would be viewed by Git as making a change.
 
 As this is the case, it would be very easy to have your changes overlap with
-those of someone else's. Git is not able to manage merging these changes 
+those of someone else's. These overlapping changes, or *conflicts*, are not able
+to be merged automatically by Git, so you would have to manually select changes.
+
+### Viewing conflicts
+
+<code class="command">git diff</code>
+
+You can view the differences between two files by using `git diff`.
+
+### Resolving conflicts
+
+When you start a merge, there may be conflicts. If you merge, and Git tells you
+that there is a conflict, then you have to merge the files manually. For
+example, it may say
+
+> ```
+> Auto-merging file1
+> CONFLICT(add/add): Merge conflict in file1
+> Automatic merge failed; fix conflicts and then commit the result
+> ```
+
+If you open your file in your editor, you will then be able to see some conflict
+markers, which mark the conflicts in your files. In the previous example, you
+can see how there was a conflict inside `file1`. If you go inside the files that
+have conflicts, you will be able to see something like this:
+
+TODO: come up with example
+> ```
+> ```
+
+This shows what changes git is unable to merge automatically in your files.  The
+first line with the markers (`<<<<<`) shows what you merged into. Suppose, for
+the first example, that the command used for merging is `git merge b2`. Then,
+the changes from the branch `b2` would be added to the current branch,
+implicitly using HEAD as the target. Thus, you see `HEAD` on the left arrows
+(`<<<<<<`), because the part between that marker and the equals (`=======`) is
+what part came from `HEAD`.
+
+The part between the equals and the right arrows (`>>>>>>`) is the code from
+branch `b2`. You can think of this as the first part being the local code
+(ours), while the second part is the incoming changes from the merge (theirs).
+
+To resolve the conflict, you can manually change the file until it has the
+desired text/code, by deleting or moving the lines. Make sure that you also
+delete the conflict markers (`<<<<<`, `======`, and `>>>>>>`). For example, you
+might change 
+
+
+> ```
+> /**
+>  * Prints the welcome message
+> */
+> <<<<<<< HEAD
+> function printMessage(showUsage, message) {
+>     console.log(message);
+>     
+> =======
+> function printMessage(showUsage, showVersion) {
+>     console.log("Welcome to Line Counter");
+>     if(showVersion) {
+>         console.log("Version: 1.0.0");
+>     }
+> >>>>>>> b2
+>     if(showUsage) {
+>         console.log("Usage: node base.js <file1> <file2>
+>     }
+> }
+> ```
+
+to
+
+> ```
+> /**
+>  * Prints the welcome message
+> */
+> function printMessage(showUsage, showVersion) {
+>     console.log("Welcome to Line Counter");
+>     if(showVersion) {
+>         console.log("Version: 1.0.0");
+>     }
+>     if(showUsage) {
+>         console.log("Usage: node base.js <file1> <file2>
+>     }
+> }
+> ```
+
+If you use VS Code, you have the option to switch to a 'merge editor'.
+
+![Option to 'Resolve in Merge Editor' in VS
+Code](../Images/Git/VSCode_Resolve_In_Merge_Editor.png)
+
+This will show three windows, the current branch, the incoming changes, and the
+final result of the file. You can use the provided buttons to accept the changes
+from either branch or select both. You can also edit the resultant directly to
+get the desired result. There should also be an option to go to the next
+conflict.
+
+![VSCode 3 way merge editor view](../Images/Git/VSCode_3_Way_Merge_Editor.png)
+
+To finish the merge process, you have to `add` the file and then `commit`. You
+will make a commit that marks the completion of the merge, which includes all of
+the files involved in the merge (those with conflicts and without). This will
+also open a slightly different commit message, which shows you what the merge
+was about.
+
+You should make sure that all of the conflicts have been resolved before you
+stage the files.
+
+### How to use merges
+
+Before you push your changes, you should make sure that you merge in the `main`
+branch. You can do this by running `git fetch origin`, then `git merge
+origin/main`. 
+
+The quick brown fox jumped over the lazy dog
+Ghf qluce bpywk tyx nlm;fs yvfp ghf iazj syd
 
 
 > # This could be implemented next year
