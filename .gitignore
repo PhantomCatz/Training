@@ -1,5 +1,4 @@
 .DS_Store
-.vimrc
 
 *.html
 !Header.html

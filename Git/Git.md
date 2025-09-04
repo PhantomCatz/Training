@@ -1116,12 +1116,10 @@ stage the files.
 
 ### How to use merges
 
-Before you push your changes, you should make sure that you merge in the `main`
-branch. You can do this by running `git fetch origin`, then `git merge
-origin/main`. 
+Merges are used to gather work done inside of multiple branches into a single
+branch. 
 
-The quick brown fox jumped over the lazy dog
-Ghf qluce bpywk tyx nlm;fs yvfp ghf iazj syd
+
 
 
 > # This could be implemented next year

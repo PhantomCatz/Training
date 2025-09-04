@@ -20,8 +20,8 @@ be a feature of every major browser. For most browsers, you can open it by
 pressing F12, or using the right-click menu (You may have to press the 'fn'
 (function) key along with F12). 
 
-For example, in Firefox, pressing **F12** will immediately open the console. You can
-also right click, and select **Inspect**.
+For example, in Firefox, pressing **F12** will immediately open the console. You
+can also right click, and select **Inspect**.
 
 ![Right click menu of Firefox. The bottom item is circled, which states
 'Inspect'.](../Images/Javascript/FirefoxContextMenu.png)
@@ -214,7 +214,7 @@ not change.
 
 You can make a variable constant by using the keyword `const` instead of `let`.
 This will make it so that you cannot reassign the value of that variable, so it
-keeps it's value from when you declared it.
+keeps its value from when you declared it.
 
 > ```Javascript
 > const foo = "asdf";
@@ -507,3 +507,139 @@ few useful things about using these.
    >
    > < undefined
    > ```
+
+TODO: finish??
+
+
+## Conditional Statements
+
+### Boolean Values
+
+A boolean value is one of two values: 'True' or 'False'. Booleans represent a
+logical statement, with the idea that every statement is either true or false.
+For example, the statement `1 < 2` would be true, while the statement `2 < 1`
+would be false.
+
+There are a few operators you can use that return a boolean:
+
+ * `==`
+
+   This operator compares two values for equality. There are two equals signs
+   because one would signify assignment. For example, `1 == 1` is true, while
+   `"foo" == "bar"` is false.
+
+ * `!=`
+   
+   This operator is 'not equals', evaluating to true when the operands are not
+   equal (It kind of looks like a slash going through the equals-sign). Thus,
+   `1 != 1` is false, while `"foo" != "bar"` is true.
+
+ * `<`, `<=`, `>`, `>=`
+
+   These operators are for comparison. Like in math, `<` and `>` test for strict
+   less/greater than, while `<=` and `>=` also are true for equality. For
+   example, `1 < 2` is true, `1 < 1` is false, and `1 <= 1` is true.
+
+   These operators also work on strings, comparing them alphabetically. Thus,
+   you can do things like `"a" < "b"` (which would evaluate to true).
+
+ * `!`
+
+   This operator negates a boolean `!true == false`, `!false == true`
+
+ * `||`, `&&`
+
+   These operators are logical OR and logical AND. In truth tables,
+
+   OR:
+   ```
+    | F T
+   -+-----
+   F| F T
+   T| T T
+   ```
+
+   AND:
+   ```
+    | F T
+   -+-----
+   F| F F
+   T| F T
+   ```
+
+### If/else statements
+
+To write effective programs, you need to have *conditional statements*,
+statements that only run when a certain condition is met. You can represent the
+condition with booleans, and you can make part of your program run when the
+condition is met using *`if` statements*.
+
+Here is an example program:
+
+> ```Javascript
+> let v = 1;
+> if(true) {
+>   v = 2;
+> }
+> if(false) {
+>   v = 3;
+> }
+> console.log(v);
+>
+> > 2
+>
+> < undefined
+> ```
+
+As you can see, the code inside of the first if block (the code inside of the
+curly braces) runs, but the code inside of the second block does not run. This
+is because the first if statement has a true condition, while the second block's
+condition is not true. By combining the boolean expressions with the if
+statements, you can make complex code.
+
+For example, if you applied names to the previous example,
+
+> ```Javascript
+> let robotState = STOPPED;
+> if(robotIsRunning) {
+>   robotState = RUNNING;
+> }
+> if(robotIsDisabled) {
+>   robotState = DISABLED;
+> }
+> console.log(robotState);
+> ```
+
+<!-- idk-->
+
+### Truthy/Falsy Values
+
+In JavaScript, values have an inherent boolean value. Thus, you can write code
+like this:
+
+> ```Javascript
+> let a = 0;
+> let b = 1;
+>
+> if(a) {
+>   console.log("a");
+> }
+> if(b) {
+>   console.log("b");
+> }
+>
+> > b
+>
+> < undefined
+> ```
+
+In Javascript, most values are *truthy*, acting as `true` in a boolean
+statement.
+
+ * `false`
+ * `0`
+ * `0n`
+ * `""`
+ * `undefined`
+ * `null`
+

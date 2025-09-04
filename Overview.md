@@ -65,20 +65,21 @@ JavaScript
  - Variables, constants assignments
  - Numbers, math operators
    - Number (Ints, floats), big ints
- * Strings, methods on strings
-   * Concatenation
-   * Template literals
+ - Strings
+   - Concatenation
+   - Template literals
+   * Methods on strings
+ * If, else
+   - Boolean expressions
+   * Truthy/falsy values
+ * For, while
+   * of, in
  * Arrays
    * ...
    * push, pop
  * Objects
    * Null/undefined
    * ...
- * If, else
-   * Boolean expressions
-   * Truthy/falsy values
- * For, while
-   * of, in
  * Switch, case
  * Functions
    * Returning, early exit
@@ -105,13 +106,13 @@ JavaScript
 Typescript
 ==========
 
-Is this really necessary?
-
- * Types
+ - Types
+ - Union types
+ - Generics
  * Interfaces
- * Functional types
- * Union types
- * Object types (permitted keys)
+   * TODO: Do we need this?
+ - Functional types
+ - Object types (permitted keys)
 
 HTML, CSS
 =========
