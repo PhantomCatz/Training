@@ -1,5 +1,6 @@
-*.html
-
-Signs/*
-
 .DS_Store
+
+*.html
+!Header.html
+
+build
